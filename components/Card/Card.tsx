@@ -21,9 +21,11 @@ const Card = ({ post, user }: CardProps) => {
   //   const user = userContext?.user || null;
 
   return (
-    <div className="border p-4 rounded-lg shadow-md max-w-md mx-auto">
+    <div className="border p-4 rounded-lg shadow-md max-w-md ">
       <h2 className="text-xl font-bold">{post.title}</h2>
-      <p className="text-gray-700 mb-2">{post.content}</p>
+      <p className="text-gray-700 mb-2 break-words overflow-hidden max-w-full whitespace-pre-wrap">
+        {post.content}
+      </p>
 
       {/* Pass post owner's ID */}
       <ClientCardActions postId={post.id} postUserId={post.user_id} user={user} />
