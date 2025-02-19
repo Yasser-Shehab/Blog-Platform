@@ -8,7 +8,7 @@ export default async function ProtectedPage({ searchParams }: { searchParams: { 
 
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  }: { data: { user: any } } = await supabase.auth.getUser(); // ✅ Explicitly typed as `any`
 
   if (!user) {
     return redirect("/sign-in");

@@ -37,13 +37,15 @@ export default async function CardList({ searchParams }: { searchParams: { page?
   const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
   const posts = await getPosts(page);
 
+  console.log({ posts });
+
   return (
     <div className="flex flex-col items-center gap-4">
       <div className="grid grid-cols-1 gap-4">
         {posts.length === 0 ? (
           <p>No posts found.</p>
         ) : (
-          posts.map((post) => <Card key={post.id} post={post} />)
+          posts.map((post) => <Card key={post.id} post={post} user={user} />)
         )}
       </div>
 
