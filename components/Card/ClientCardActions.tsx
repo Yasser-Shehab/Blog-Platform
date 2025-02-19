@@ -64,6 +64,8 @@ const ClientCardActions = ({
 
   useEffect(() => {
     const fetchReactions = async () => {
+      console.log("fetchReactions");
+
       const { data: likeCount } = await supabase
         .from("likes")
         .select("*", { count: "exact" })
@@ -95,7 +97,55 @@ const ClientCardActions = ({
     };
 
     fetchReactions();
-  }, [postId, user?.id]);
+
+    const likeSubscription = supabase
+      .channel(`realtime-likes-${postId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "likes",
+          filter: `post_id=eq.${postId}`,
+        },
+        () => {
+          fetchReactions();
+          //   setComments((prev) => [...prev, payload.new as Comment]);
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "DELETE", schema: "public", table: "likes", filter: `post_id=eq.${postId}` },
+        () => {
+          fetchReactions();
+        }
+      )
+
+      .subscribe();
+
+    const dislikeSubscription = supabase
+      .channel(`realtime-dislikes-${postId}`)
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "dislikes", filter: `post_id=eq.${postId}` },
+        () => {
+          fetchReactions();
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "DELETE", schema: "public", table: "dislikes", filter: `post_id=eq.${postId}` },
+        () => {
+          fetchReactions();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(likeSubscription);
+      supabase.removeChannel(dislikeSubscription);
+    };
+  }, [postId, user?.id, supabase]);
 
   useEffect(() => {
     const fetchComments = async () => {
