@@ -29,6 +29,8 @@ type Post = {
   content: string;
 };
 
+const supabase = createClient();
+
 const ClientCardActions = ({
   postId,
   postUserId,
@@ -47,8 +49,10 @@ const ClientCardActions = ({
   const [postTitle, setPostTitle] = useState("");
   const [postContent, setPostContent] = useState("");
   const [commentText, setCommentText] = useState("");
-  const supabase = createClient();
+
   const router = useRouter();
+
+  const toggleEdit = () => setIsEditing(true);
 
   const isPostOwner = user?.id === postUserId;
 
@@ -68,8 +72,9 @@ const ClientCardActions = ({
     };
 
     fetchPost();
-  }, [postId, supabase]);
+  }, [postId]);
 
+  //Fetch the reactions and comments when the component mounts and if the likes or dislikes change it will update in realtime
   useEffect(() => {
     const fetchReactions = async () => {
       console.log("fetchReactions");
@@ -153,7 +158,7 @@ const ClientCardActions = ({
       supabase.removeChannel(likeSubscription);
       supabase.removeChannel(dislikeSubscription);
     };
-  }, [postId, user?.id, supabase]);
+  }, [postId, user?.id]);
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -192,29 +197,25 @@ const ClientCardActions = ({
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [postId, supabase]);
+  }, [postId]);
 
   const handleLike = async () => {
     if (!user) return;
 
     if (hasLiked) {
-      // Remove like
       await supabase.from("likes").delete().eq("post_id", postId).eq("user_id", user.id);
-      setLikes((prev) => prev - 1);
-      setHasLiked(false);
-    } else {
-      // Remove dislike if user has already disliked
-      if (hasDisliked) {
-        await supabase.from("dislikes").delete().eq("post_id", postId).eq("user_id", user.id);
-        setDislikes((prev) => prev - 1);
-        setHasDisliked(false);
-      }
-
-      // Add like
-      await supabase.from("likes").insert([{ post_id: postId, user_id: user.id }]);
-      setLikes((prev) => prev + 1);
-      setHasLiked(true);
+      return setLikes((prev) => prev - 1), setHasLiked(false);
     }
+
+    if (hasDisliked) {
+      await supabase.from("dislikes").delete().eq("post_id", postId).eq("user_id", user.id);
+      setDislikes((prev) => prev - 1);
+      setHasDisliked(false);
+    }
+
+    await supabase.from("likes").insert([{ post_id: postId, user_id: user.id }]);
+    setLikes((prev) => prev + 1);
+    setHasLiked(true);
   };
 
   const handleDislike = async () => {
@@ -307,10 +308,7 @@ const ClientCardActions = ({
               <Check size={18} />
             </button>
           ) : (
-            <button
-              onClick={() => setIsEditing(true)}
-              className="text-blue-500 hover:text-blue-700"
-            >
+            <button onClick={toggleEdit} className="text-blue-500 hover:text-blue-700">
               <Edit3 size={18} />
             </button>
           )}
