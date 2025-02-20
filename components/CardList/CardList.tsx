@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import Card from "../Card/Card";
 import Link from "next/link";
 
-const POSTS_PER_PAGE = 5;
+const POSTS_PER_PAGE = 2;
 
 type Post = {
   id: number;

@@ -1,12 +1,13 @@
 import { signInAction } from "@/app/actions";
-import { createClient } from "@/lib/__mocks__/supabase"; // Mock Supabase
+import { createClient } from "@/utils/supabase/server";
 
-jest.mock("@/lib/supabase"); // Mock Supabase
+// Tests aren't working as of now due an issue with integrating with Supabase mocks
+
+jest.mock("@/lib/supabase"); // Mock Supabase client
 jest.mock("next/headers", () => ({
   cookies: jest.fn(() => ({
-    get: jest.fn(),
+    getAll: jest.fn(() => []),
     set: jest.fn(),
-    delete: jest.fn(),
   })),
 }));
 
@@ -35,7 +36,7 @@ describe("signInAction", () => {
 
   it("should return an error message on failed login", async () => {
     supabaseMock.auth.signInWithPassword.mockResolvedValueOnce({
-      error: { message: "Invalid credentials" },
+      error: { message: "Invalid login credentials" },
     });
 
     const formData = new FormData();
@@ -43,6 +44,6 @@ describe("signInAction", () => {
     formData.append("password", "wrongpassword");
 
     const result = await signInAction(formData);
-    expect(result).toEqual(expect.stringContaining("/sign-in"));
+    expect(result).toContain("/sign-in");
   });
 });
