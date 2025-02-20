@@ -5,6 +5,8 @@ import { Trash2, Edit3, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { formatDate } from "@/utils/Date/date";
+import CommentItem from "./CommentItem";
+import LikeDislike from "./LikesDislike";
 
 type User = {
   id: string;
@@ -336,14 +338,12 @@ const ClientCardActions = ({
         </>
       )}
 
-      <div className="flex gap-4 items-center mt-2">
-        <button onClick={handleLike} className="px-2 py-1 bg-blue-500 text-white rounded">
-          👍 {likes}
-        </button>
-        <button onClick={handleDislike} className="px-2 py-1 bg-red-500 text-white rounded">
-          👎 {dislikes}
-        </button>
-      </div>
+      <LikeDislike
+        likes={likes}
+        dislikes={dislikes}
+        handleLike={handleLike}
+        handleDislike={handleDislike}
+      />
 
       <div className="mt-4">
         <h3 className="text-lg font-semibold">Comments</h3>
@@ -368,44 +368,12 @@ const ClientCardActions = ({
         )}
         <ul className="mt-2 space-y-4">
           {comments.map((comment) => (
-            <li
+            <CommentItem
               key={comment.id}
-              className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  {/* Avatar */}
-                  <img
-                    src={`https://avatars.dicebear.com/api/initials/${comment.user_email.split("@")[0]}.svg`}
-                    alt="User Avatar"
-                    className="w-8 h-8 rounded-full"
-                  />
-
-                  {/* Username */}
-                  <p className="ml-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-                    {comment.user_email.split("@")[0]}
-                  </p>
-                </div>
-
-                {/* Delete Button (Visible only to the comment owner) */}
-                {user?.id === comment.user_id && (
-                  <button
-                    onClick={() => handleDeleteComment(comment.id)}
-                    className="text-red-500 hover:text-red-700"
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                )}
-              </div>
-
-              {/* Comment Content */}
-              <p className="mt-2 text-gray-600 dark:text-gray-400">{comment.content}</p>
-
-              {/* Timestamp */}
-              <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">
-                {formatDate(comment.created_at)}
-              </p>
-            </li>
+              comment={comment}
+              userId={user?.id || null}
+              handleDeleteComment={handleDeleteComment}
+            />
           ))}
         </ul>
       </div>
