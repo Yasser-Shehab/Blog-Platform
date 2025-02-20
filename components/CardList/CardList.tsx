@@ -28,7 +28,7 @@ async function getPosts(page: number): Promise<Post[]> {
   return posts || [];
 }
 
-export default async function CardList({ searchParams }: { searchParams: { page?: string } }) {
+export default async function CardList({ searchParams }: { searchParams: any }) {
   const supabase = await createClient();
   const {
     data: { user },

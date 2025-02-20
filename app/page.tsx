@@ -1,7 +1,7 @@
 import CardList from "@/components/CardList/CardList";
 import { createClient } from "@/utils/supabase/server";
 
-export default async function Home({ searchParams }: { searchParams: { page?: string } }) {
+export default async function Home({ searchParams }: { searchParams: any }) {
   const supabase = await createClient();
 
   const {

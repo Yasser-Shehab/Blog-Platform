@@ -3,7 +3,7 @@ import CardList from "@/components/CardList/CardList";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
-export default async function ProtectedPage({ searchParams }: { searchParams: { page?: string } }) {
+export default async function ProtectedPage({ searchParams }: { searchParams: any }) {
   const supabase = await createClient();
 
   const {
