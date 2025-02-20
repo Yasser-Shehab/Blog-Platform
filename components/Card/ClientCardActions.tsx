@@ -74,7 +74,7 @@ const ClientCardActions = ({
     fetchPost();
   }, [postId]);
 
-  //Fetch the reactions and comments when the component mounts and if the likes or dislikes change it will update in realtime
+  //Fetch the reactions when the component mounts and if the likes or dislikes change it will update in realtime
   useEffect(() => {
     const fetchReactions = async () => {
       console.log("fetchReactions");
@@ -160,6 +160,7 @@ const ClientCardActions = ({
     };
   }, [postId, user?.id]);
 
+  //Fetch the comments and updates realtime if a new comment is added
   useEffect(() => {
     const fetchComments = async () => {
       const { data, error } = await supabase

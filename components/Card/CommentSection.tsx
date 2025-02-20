@@ -29,7 +29,7 @@ const CommentSection = ({
   handleDeleteComment: (commentId: string) => void;
 }) => {
   return (
-    <div className="mt-4">
+    <div className="mt-4 min-w-[300px]">
       <h3 className="text-lg font-semibold">Comments</h3>
       {user ? (
         <>
