@@ -38,11 +38,11 @@ const CommentSection = ({
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
             placeholder="Add a comment..."
-            className="border p-1 rounded w-full"
+            className="border p-1 rounded w-full mb-4"
           />
           <button
             onClick={handleComment}
-            className="mt-2 px-3 py-1 bg-green-500 text-white rounded"
+            className="mt-2 px-3 py-1 bg-green-500 text-white rounded w-full"
           >
             Submit
           </button>

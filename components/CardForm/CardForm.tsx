@@ -4,17 +4,16 @@ export default function CardForm() {
   return (
     <form
       action={createPost}
-      className="p-6 border rounded-lg shadow-lg bg-white dark:bg-gray-800 max-w-2xl mx-auto"
+      className="p-6 border rounded-xl shadow-md bg-white dark:bg-gray-800 "
     >
-      <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">
+      <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
         Create a New Post
       </h2>
 
-      {/* Title Input */}
       <div className="mb-4">
         <label
           htmlFor="title"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
         >
           Title
         </label>
@@ -23,16 +22,15 @@ export default function CardForm() {
           name="title"
           id="title"
           placeholder="Enter a title"
-          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-100"
+          className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"
           required
         />
       </div>
 
-      {/* Content Textarea */}
       <div className="mb-6">
         <label
           htmlFor="content"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
         >
           Content
         </label>
@@ -40,18 +38,17 @@ export default function CardForm() {
           name="content"
           id="content"
           placeholder="Write your post here..."
-          rows={5}
-          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-100"
+          rows={6}
+          className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"
           required
         />
       </div>
 
-      {/* Submit Button */}
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200"
+        className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200"
       >
-        Post
+        Publish Post
       </button>
     </form>
   );
