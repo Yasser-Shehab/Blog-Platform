@@ -63,28 +63,6 @@ Check out the live demo of the project hosted on Vercel:
 
 ---
 
-## 📂 Project Structure
-
-📦 project-root
-┣ 📂 app
-┃ ┣ 📂 (auth-pages)
-┃ ┣ 📂 auth
-┃ ┣ 📂 context
-┃ ┣ 📂 protected
-┃ ┃ ┗ 📜 actions.ts
-┃ ┣ 📜 favicon.ico
-┃ ┣ 📜 globals.css
-┃ ┣ 📜 layout.tsx
-┃ ┣ 📜 opengraph-image.png
-┃ ┣ 📜 page.tsx
-┃ ┗ 📜 twitter-image.png
-┣ 📂 components
-┃ ┣ 📂 Card
-┃ ┣ 📂 CardForm
-┃ ┣ 📂 CardList
-┃ ┣ 📂 tutorial
-┃ ┣ 📂 typography
-
 ## 🚧 Future Improvements
 
 - **Unit Testing**: Integrate comprehensive unit tests using Supabase mockups.
