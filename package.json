@@ -7,7 +7,6 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "type": "module",
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
