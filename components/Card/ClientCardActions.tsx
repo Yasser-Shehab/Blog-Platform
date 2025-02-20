@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Trash2, Edit3, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
+import { formatDate } from "@/utils/Date/date";
 
 type User = {
   id: string;
@@ -15,6 +16,7 @@ type Comment = {
   content: string;
   user_id: string;
   user_email: string;
+  created_at: string;
 };
 
 type Post = {
@@ -154,7 +156,7 @@ const ClientCardActions = ({
       const { data, error } = await supabase
 
         .from("comments")
-        .select("id, content, user_id, user_email")
+        .select("id, content, user_id, user_email, created_at")
         .eq("post_id", postId)
         .order("created_at", { ascending: true });
 
@@ -277,6 +279,20 @@ const ClientCardActions = ({
     router.refresh(); // Refresh page after deletion
   };
 
+  const handleDeleteComment = async (commentId: string) => {
+    if (!user) return;
+
+    // Delete the comment from the database
+    const { error } = await supabase.from("comments").delete().eq("id", commentId);
+
+    if (!error) {
+      // Remove the deleted comment from the UI
+      setComments((prev) => prev.filter((comment) => comment.id !== commentId));
+    } else {
+      console.error("Error deleting comment:", error.message);
+    }
+  };
+
   return (
     <div className="relative  p-4 rounded-lg shadow-md max-w-md mx-auto">
       {isPostOwner && (
@@ -350,11 +366,45 @@ const ClientCardActions = ({
         ) : (
           <p className="text-sm  text-gray-700 ">Log in to comment</p>
         )}
-        <ul className="mt-2">
+        <ul className="mt-2 space-y-4">
           {comments.map((comment) => (
-            <li key={comment.id} className="border-b py-1">
-              <p>{comment.user_email.split("@")[0]}</p>
-              {comment.content}
+            <li
+              key={comment.id}
+              className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  {/* Avatar */}
+                  <img
+                    src={`https://avatars.dicebear.com/api/initials/${comment.user_email.split("@")[0]}.svg`}
+                    alt="User Avatar"
+                    className="w-8 h-8 rounded-full"
+                  />
+
+                  {/* Username */}
+                  <p className="ml-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                    {comment.user_email.split("@")[0]}
+                  </p>
+                </div>
+
+                {/* Delete Button (Visible only to the comment owner) */}
+                {user?.id === comment.user_id && (
+                  <button
+                    onClick={() => handleDeleteComment(comment.id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                )}
+              </div>
+
+              {/* Comment Content */}
+              <p className="mt-2 text-gray-600 dark:text-gray-400">{comment.content}</p>
+
+              {/* Timestamp */}
+              <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">
+                {formatDate(comment.created_at)}
+              </p>
             </li>
           ))}
         </ul>
