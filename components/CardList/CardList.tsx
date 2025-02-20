@@ -18,7 +18,11 @@ async function getPosts(page: number): Promise<Post[]> {
   const start = (page - 1) * POSTS_PER_PAGE;
   const end = start + POSTS_PER_PAGE - 1;
 
-  const { data: posts, error } = await supabase.from("posts").select("*").range(start, end);
+  const { data: posts, error } = await supabase
+    .from("posts")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .range(start, end);
 
   if (error) {
     console.error("Error fetching posts:", error);
