@@ -7,6 +7,7 @@ import { createClient } from "@/utils/supabase/client";
 import { formatDate } from "@/utils/Date/date";
 import CommentItem from "./CommentItem";
 import LikeDislike from "./LikesDislike";
+import PostEditor from "./PostEditor";
 
 type User = {
   id: string;
@@ -317,27 +318,16 @@ const ClientCardActions = ({
         </div>
       )}
 
-      {isEditing ? (
-        <div className="mt-5">
-          <input
-            type="text"
-            value={postTitle}
-            onChange={(e) => setPostTitle(e.target.value)}
-            className="w-full border rounded p-2 mb-2"
-          />
-          <textarea
-            value={postContent}
-            onChange={(e) => setPostContent(e.target.value)}
-            className="w-full border rounded p-2"
-          />
-        </div>
-      ) : (
-        <>
-          {/* <h2 className="text-xl font-bold">{postTitle}</h2>
-          <p className="text-gray-700">{postContent}</p> */}
-        </>
+      {isEditing && (
+        <PostEditor
+          postTitle={postTitle}
+          postContent={postContent}
+          setPostTitle={setPostTitle}
+          setPostContent={setPostContent}
+          handleEdit={handleEdit}
+          setIsEditing={setIsEditing}
+        />
       )}
-
       <LikeDislike
         likes={likes}
         dislikes={dislikes}
