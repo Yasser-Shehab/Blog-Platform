@@ -7,12 +7,14 @@ import { createClient } from "@/utils/supabase/client";
 
 type User = {
   id: string;
+  email: string;
 };
 
 type Comment = {
   id: string;
   content: string;
   user_id: string;
+  user_email: string;
 };
 
 type Post = {
@@ -150,8 +152,9 @@ const ClientCardActions = ({
   useEffect(() => {
     const fetchComments = async () => {
       const { data, error } = await supabase
+
         .from("comments")
-        .select("id, content, user_id")
+        .select("id, content, user_id, user_email")
         .eq("post_id", postId)
         .order("created_at", { ascending: true });
 
@@ -234,9 +237,13 @@ const ClientCardActions = ({
   const handleComment = async () => {
     if (!user || commentText.trim() === "") return;
 
+    console.log({ user });
+
     const { error } = await supabase
       .from("comments")
-      .insert([{ post_id: postId, user_id: user.id, content: commentText.trim() }]);
+      .insert([
+        { post_id: postId, user_id: user.id, content: commentText.trim(), user_email: user.email },
+      ]);
 
     if (!error) {
       setCommentText("");
@@ -324,7 +331,7 @@ const ClientCardActions = ({
 
       <div className="mt-4">
         <h3 className="text-lg font-semibold">Comments</h3>
-        {user && (
+        {user ? (
           <>
             <input
               type="text"
@@ -340,10 +347,13 @@ const ClientCardActions = ({
               Submit
             </button>
           </>
+        ) : (
+          <p className="text-sm  text-gray-700 ">Log in to comment</p>
         )}
         <ul className="mt-2">
           {comments.map((comment) => (
             <li key={comment.id} className="border-b py-1">
+              <p>{comment.user_email.split("@")[0]}</p>
               {comment.content}
             </li>
           ))}
