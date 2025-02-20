@@ -1,104 +1,94 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# Blog Platform
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
+Welcome to the **Blog Platform**, a fully functional and SEO-friendly blogging platform built with modern web technologies. This project showcases my ability to create a feature-rich application under tight deadlines while leveraging powerful tools like **Supabase** and **Next.js**.
 
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+---
 
-## Features
+## 🚀 Features
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Middleware
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Components with [shadcn/ui](https://ui.shadcn.com/)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+The Blog Platform includes the following core features:
 
-## Demo
+- **SEO-Friendly**: Built with **Next.js** for server-side rendering (SSR) and optimized for search engines.
+- **Realtime Interactions**:
+  - **Like/Dislike Posts**: Users can like or dislike posts in realtime.
+  - **Comment Section**: A realtime comment section allows users to engage with posts dynamically.
+- **Pagination**: Posts are paginated for better performance and user experience.
+- **Authentication**: Users can sign up, log in, and manage their posts.
+- **Post Management**:
+  - **Edit/Delete Posts**: Users can edit or delete their own posts. These options are only visible to the post owner.
+- **Responsive Design**: The platform is fully responsive and works seamlessly across devices.
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+---
 
-## Deploy to Vercel
+## 🛠️ Technologies Used
 
-Vercel deployment will guide you through creating a Supabase account and project.
+- **Frontend**:
+  - **Next.js**: For server-side rendering, routing, and SEO optimization.
+  - **Tailwind CSS**: For styling and responsive design.
+- **Backend**:
+  - **Supabase**: Used for authentication, database, and realtime functionality.
+- **Hosting**:
+  - **Vercel**: The platform is hosted on Vercel for fast and reliable deployment.
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+---
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+## 🧑‍💻 Development Journey
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+### Why Supabase?
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+Initially, I planned to build the backend from scratch to demonstrate my full-stack capabilities. However, due to the tight deadline, I decided to use **Supabase** to accelerate development. Supabase provided a robust backend solution with features like authentication, database management, and realtime functionality, allowing me to focus on building the core features of the platform.
 
-## Clone and run locally
+### Challenges Faced
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
+- **Realtime Features**: Implementing realtime like/dislike and comment functionality required careful integration with Supabase's realtime capabilities.
+- **Unit Testing**: I attempted to add unit tests, but mocking Supabase's behavior proved to be time-consuming. This is an area I plan to improve in the future.
+- **SEO Optimization**: Ensuring the platform was SEO-friendly required leveraging Next.js's SSR and optimizing metadata.
 
-2. Create a Next.js app using the Supabase Starter template npx command
+---
 
-   ```bash
-   npx create-next-app --example with-supabase with-supabase-app
-   ```
+## 🎯 Key Achievements
 
-   ```bash
-   yarn create next-app --example with-supabase with-supabase-app
-   ```
+- Delivered a fully functional blogging platform under a tight deadline.
+- Implemented realtime features (likes, dislikes, comments) using Supabase.
+- Ensured the platform is SEO-friendly with Next.js.
+- Added pagination and post management features with proper user authorization.
+- Hosted the project on **Vercel** for seamless deployment and scalability.
 
-   ```bash
-   pnpm create next-app --example with-supabase with-supabase-app
-   ```
+---
 
-3. Use `cd` to change into the app's directory
+## 🔗 Live Demo
 
-   ```bash
-   cd with-supabase-app
-   ```
+Check out the live demo of the project hosted on Vercel:  
+👉 [https://blog-platform-inky-eight.vercel.app/](https://blog-platform-inky-eight.vercel.app/)
 
-4. Rename `.env.example` to `.env.local` and update the following:
+---
 
-   ```
-   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
-   ```
+## 📂 Project Structure
 
-   Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
+📦 project-root
+┣ 📂 app
+┃ ┣ 📂 (auth-pages)
+┃ ┣ 📂 auth
+┃ ┣ 📂 context
+┃ ┣ 📂 protected
+┃ ┃ ┗ 📜 actions.ts
+┃ ┣ 📜 favicon.ico
+┃ ┣ 📜 globals.css
+┃ ┣ 📜 layout.tsx
+┃ ┣ 📜 opengraph-image.png
+┃ ┣ 📜 page.tsx
+┃ ┗ 📜 twitter-image.png
+┣ 📂 components
+┃ ┣ 📂 Card
+┃ ┣ 📂 CardForm
+┃ ┣ 📂 CardList
+┃ ┣ 📂 tutorial
+┃ ┣ 📂 typography
 
-5. You can now run the Next.js local development server:
+## 🚧 Future Improvements
 
-   ```bash
-   npm run dev
-   ```
+- **Unit Testing**: Integrate comprehensive unit tests using Supabase mockups.
+- **Advanced Features**: Add features like user profiles, post categories, and search functionality.
+- **Performance Optimization**: Further optimize the platform for faster load times and better scalability.
 
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
-
-6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
-
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
-
-## Feedback and issues
-
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
-
-## More Supabase examples
-
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+---
