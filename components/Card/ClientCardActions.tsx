@@ -301,7 +301,7 @@ const ClientCardActions = ({
   };
 
   return (
-    <div className="relative  p-4 rounded-lg shadow-md max-w-md mx-auto">
+    <div className="relative   rounded-lg shadow-md max-w-md mx-auto">
       {isPostOwner && (
         <div className="absolute top-2 right-2 flex gap-2">
           {isEditing ? (
